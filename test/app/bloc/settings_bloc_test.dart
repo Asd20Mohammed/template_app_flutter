@@ -1,10 +1,10 @@
 // Validates that settings bloc persists and emits updates correctly.
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:template_app/app/bloc/settings_bloc.dart';
-import 'package:template_app/core/constants/app_constants.dart';
-import 'package:template_app/domain/repositories/settings_repository.dart';
-import 'package:template_app/domain/usecases/settings_usecases.dart';
+import 'package:template_app/src/core/constants/app_constants.dart';
+import 'package:template_app/src/features/settings/domain/repositories/settings_repository.dart';
+import 'package:template_app/src/features/settings/domain/usecases/settings_usecases.dart';
+import 'package:template_app/src/features/settings/presentation/bloc/settings_bloc.dart';
 
 class _FakeSettingsRepository implements SettingsRepository {
   final Map<String, Object> _storage = {};

@@ -1,10 +1,10 @@
 // Verifies authentication bloc behaviour using a fake repository.
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:template_app/app/bloc/auth_bloc.dart';
-import 'package:template_app/domain/entities/user.dart';
-import 'package:template_app/domain/repositories/auth_repository.dart';
-import 'package:template_app/domain/usecases/auth_usecases.dart';
+import 'package:template_app/src/features/auth/domain/repositories/auth_repository.dart';
+import 'package:template_app/src/features/auth/domain/usecases/auth_usecases.dart';
+import 'package:template_app/src/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_app/src/features/profile/domain/entities/user.dart';
 
 class _FakeAuthRepository implements AuthRepository {
   _FakeAuthRepository();

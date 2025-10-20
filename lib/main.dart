@@ -1,5 +1,5 @@
-import 'package:template_app/app/app.dart';
-import 'package:template_app/bootstrap.dart';
+import 'package:template_app/src/app/app.dart';
+import 'package:template_app/src/app/bootstrap.dart';
 
 /// Entry point for the Flutter application.
 void main() {
