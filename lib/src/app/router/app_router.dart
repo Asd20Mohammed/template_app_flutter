@@ -6,6 +6,7 @@ import 'package:template_app/src/app/bloc/blocs.dart';
 import 'package:template_app/src/app/presentation/pages/splash_page.dart';
 import 'package:template_app/src/features/auth/presentation/pages/login_page.dart';
 import 'package:template_app/src/features/dashboard/presentation/pages/home_page.dart';
+import 'package:template_app/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:template_app/src/features/settings/presentation/pages/settings_page.dart';
 import 'package:template_app/src/shared/widgets/layout/app_shell.dart';
 import 'package:template_app/src/shared/widgets/state/loading_view.dart';
@@ -91,6 +92,31 @@ class SettingsRoute extends GoRouteData with $SettingsRoute {
   Widget build(BuildContext context, GoRouterState state) {
     _syncLocale(context, locale);
     return const AppShell(child: SettingsPage());
+  }
+
+  @override
+  String? redirect(BuildContext context, GoRouterState state) {
+    final authStatus = context.read<AuthBloc>().state.status;
+    if (authStatus != AuthStatus.authenticated) {
+      return LoginRoute(locale: locale ?? _currentLocale(context)).location;
+    }
+    return null;
+  }
+}
+
+/// Profile route showing user information.
+@TypedGoRoute<ProfileRoute>(path: '/profile')
+class ProfileRoute extends GoRouteData with $ProfileRoute {
+  /// Creates a profile route.
+  const ProfileRoute({this.locale});
+
+  /// Optional locale applied during navigation.
+  final String? locale;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    _syncLocale(context, locale);
+    return const AppShell(child: ProfilePage());
   }
 
   @override

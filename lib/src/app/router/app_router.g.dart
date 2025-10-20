@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
   $loginRoute,
   $homeRoute,
   $settingsRoute,
+  $profileRoute,
 ];
 
 RouteBase get $splashRoute =>
@@ -112,6 +113,35 @@ mixin $SettingsRoute on GoRouteData {
   @override
   String get location => GoRouteData.$location(
     '/settings',
+    queryParams: {if (_self.locale != null) 'locale': _self.locale},
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $profileRoute =>
+    GoRouteData.$route(path: '/profile', factory: $ProfileRoute._fromState);
+
+mixin $ProfileRoute on GoRouteData {
+  static ProfileRoute _fromState(GoRouterState state) =>
+      ProfileRoute(locale: state.uri.queryParameters['locale']);
+
+  ProfileRoute get _self => this as ProfileRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/profile',
     queryParams: {if (_self.locale != null) 'locale': _self.locale},
   );
 

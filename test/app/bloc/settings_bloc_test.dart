@@ -57,7 +57,12 @@ void main() {
         bloc.add(const SettingsInitialized());
       },
       expect: () => [
-        const SettingsState(notificationsEnabled: false, localeCode: 'ar'),
+        const SettingsState(
+          notificationsEnabled: false,
+          localeCode: 'ar',
+          textScale: 1.0,
+          layoutScale: 1.0,
+        ),
       ],
     );
 
@@ -66,7 +71,12 @@ void main() {
       build: () => bloc,
       act: (bloc) => bloc.add(const SettingsLocaleChanged('ar')),
       expect: () => [
-        const SettingsState(notificationsEnabled: true, localeCode: 'ar'),
+        const SettingsState(
+          notificationsEnabled: true,
+          localeCode: 'ar',
+          textScale: 1.0,
+          layoutScale: 1.0,
+        ),
       ],
     );
   });

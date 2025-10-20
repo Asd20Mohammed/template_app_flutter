@@ -37,6 +37,12 @@ class LocalStorage {
     await _prefs!.setBool(key, value);
   }
 
+  /// Removes a value for the provided [key].
+  Future<void> delete(String key) async {
+    await init();
+    await _prefs!.remove(key);
+  }
+
   /// Clears all stored keys.
   Future<void> clear() async {
     await init();

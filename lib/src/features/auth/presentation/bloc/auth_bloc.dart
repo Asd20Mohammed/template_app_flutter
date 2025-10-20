@@ -126,13 +126,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: AuthStatus.loading, clearError: true));
     try {
       final user = await _loginUseCase.execute(event.email, event.password);
-      emit(
-        state.copyWith(
-          status: AuthStatus.authenticated,
-          user: user,
-          clearError: true,
-        ),
-      );
+      _emitAuthenticated(user, emit);
     } catch (error) {
       emit(
         state.copyWith(
@@ -151,13 +145,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: AuthStatus.loading, clearError: true));
     try {
       final user = await _registerUseCase.execute(event.email, event.password);
-      emit(
-        state.copyWith(
-          status: AuthStatus.authenticated,
-          user: user,
-          clearError: true,
-        ),
-      );
+      _emitAuthenticated(user, emit);
     } catch (error) {
       emit(
         state.copyWith(
@@ -174,29 +162,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     await _logoutUseCase.execute();
-    emit(
-      state.copyWith(
-        status: AuthStatus.unauthenticated,
-        clearUser: true,
-        clearError: true,
-      ),
-    );
-  }
-
-  /// Checks the current session and updates the state accordingly.
-  Future<void> _onStatusCheckRequested(
-    AuthStatusCheckRequested event,
-    Emitter<AuthState> emit,
-  ) async {
     final user = await _getCurrentUserUseCase.execute();
     if (user != null) {
-      emit(
-        state.copyWith(
-          status: AuthStatus.authenticated,
-          user: user,
-          clearError: true,
-        ),
-      );
+      _emitAuthenticated(user, emit);
     } else {
       emit(
         state.copyWith(
@@ -206,5 +174,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     }
+  }
+
+  /// Checks the current session and updates the state accordingly.
+  Future<void> _onStatusCheckRequested(
+    AuthStatusCheckRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    final user = await _getCurrentUserUseCase.execute();
+    if (user != null) {
+      _emitAuthenticated(user, emit);
+    } else {
+      emit(
+        state.copyWith(
+          status: AuthStatus.unauthenticated,
+          clearUser: true,
+          clearError: true,
+        ),
+      );
+    }
+  }
+
+  void _emitAuthenticated(User user, Emitter<AuthState> emit) {
+    emit(
+      state.copyWith(
+        status: AuthStatus.authenticated,
+        user: user,
+        clearError: true,
+      ),
+    );
   }
 }

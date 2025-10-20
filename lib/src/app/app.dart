@@ -14,8 +14,10 @@ import 'package:template_app/src/core/services/notifications/push_notification_s
 import 'package:template_app/src/core/theme/app_theme.dart';
 import 'package:template_app/src/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:template_app/src/features/feature_flags/domain/repositories/feature_repository.dart';
+import 'package:template_app/src/features/notifications/presentation/bloc/notification_registration_requested.dart';
 import 'package:template_app/src/features/profile/domain/usecases/user_usecases.dart';
 import 'package:template_app/src/features/settings/domain/usecases/settings_usecases.dart';
+import 'package:template_app/src/features/drafts/presentation/bloc/draft_bloc.dart';
 
 /// MaterialApp wrapper configuring routing, themes, and localization.
 class App extends StatelessWidget {
@@ -73,6 +75,10 @@ class App extends StatelessWidget {
           create: (_) => NotificationBloc(
             pushNotificationService: serviceLocator<PushNotificationService>(),
           )..add(const NotificationRegistrationRequested()),
+        ),
+        BlocProvider<DraftBloc>(
+          create: (_) =>
+              DraftBloc(serviceLocator())..add(const DraftLoadRequested()),
         ),
         BlocProvider<ErrorBloc>(create: (_) => ErrorBloc()),
         BlocProvider<TemplateFormBloc>(create: (_) => TemplateFormBloc()),
@@ -157,20 +163,28 @@ class _AppRouterHostState extends State<AppRouterHost> {
           builder: (context, _) {
             return BlocBuilder<AppBloc, AppState>(
               builder: (context, appState) {
-                return MaterialApp.router(
-                  debugShowCheckedModeBanner: false,
-                  title: localizationManager.translate('app_title'),
-                  theme: AppTheme.light(),
-                  darkTheme: AppTheme.dark(),
-                  themeMode: appState.themeMode,
-                  locale: localizationManager.locale,
-                  supportedLocales: const [Locale('en'), Locale('ar')],
-                  localizationsDelegates: const [
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  routerConfig: _router!,
+                final settingsState = context.watch<SettingsBloc>().state;
+                final media = MediaQuery.of(context);
+                final scaledMedia = media.copyWith(
+                  textScaler: TextScaler.linear(settingsState.textScale),
+                );
+                return MediaQuery(
+                  data: scaledMedia,
+                  child: MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    title: localizationManager.translate('app_title'),
+                    theme: AppTheme.light(appState.seedColor),
+                    darkTheme: AppTheme.dark(appState.seedColor),
+                    themeMode: appState.themeMode,
+                    locale: localizationManager.locale,
+                    supportedLocales: const [Locale('en'), Locale('ar')],
+                    localizationsDelegates: const [
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    routerConfig: _router!,
+                  ),
                 );
               },
             );

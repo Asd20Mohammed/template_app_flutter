@@ -36,6 +36,7 @@ class UserRepositoryImpl implements UserRepository {
       displayName: user.displayName,
       avatarUrl: user.avatarUrl,
       roles: user.roles.map(_mapRole).toList(),
+      isGuest: user.isGuest,
     );
     final jsonString = jsonEncode(model.toJson());
     await _localStorage.writeString(_userKey, jsonString);

@@ -11,6 +11,7 @@ class User extends Equatable {
     required this.displayName,
     required this.roles,
     this.avatarUrl,
+    this.isGuest = false,
   });
 
   /// Unique user identifier.
@@ -28,6 +29,16 @@ class User extends Equatable {
   /// Roles assigned to the user for authorization decisions.
   final List<Role> roles;
 
+  /// Identifies whether the user is operating in guest mode.
+  final bool isGuest;
+
   @override
-  List<Object?> get props => [id, email, displayName, avatarUrl, roles];
+  List<Object?> get props => [
+    id,
+    email,
+    displayName,
+    avatarUrl,
+    roles,
+    isGuest,
+  ];
 }

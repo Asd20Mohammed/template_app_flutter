@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_app/src/core/constants/app_constants.dart';
 import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
+import 'package:template_app/src/core/theme/color_palette.dart';
 
 /// Describes the possible events that can update [AppBloc].
 abstract class AppEvent extends Equatable {
@@ -35,7 +36,11 @@ class AppThemeChanged extends AppEvent {
 /// Carries the immutable view of the application state.
 class AppState extends Equatable {
   /// Creates a new [AppState] instance.
-  const AppState({required this.themeMode, required this.initialized});
+  const AppState({
+    required this.themeMode,
+    required this.initialized,
+    required this.seedColor,
+  });
 
   /// The current theme mode in use by the app.
   final ThemeMode themeMode;
@@ -43,20 +48,31 @@ class AppState extends Equatable {
   /// Whether the application finished bootstrapping.
   final bool initialized;
 
+  /// Seed color used throughout the theme.
+  final Color seedColor;
+
   /// Creates a copy of the current state with optional overrides.
-  AppState copyWith({ThemeMode? themeMode, bool? initialized}) {
+  AppState copyWith({
+    ThemeMode? themeMode,
+    bool? initialized,
+    Color? seedColor,
+  }) {
     return AppState(
       themeMode: themeMode ?? this.themeMode,
       initialized: initialized ?? this.initialized,
+      seedColor: seedColor ?? this.seedColor,
     );
   }
 
   /// Provides the initial state before any logic runs.
-  factory AppState.initial() =>
-      const AppState(themeMode: ThemeMode.system, initialized: false);
+  factory AppState.initial() => const AppState(
+    themeMode: ThemeMode.system,
+    initialized: false,
+    seedColor: ColorPalette.primary,
+  );
 
   @override
-  List<Object?> get props => [themeMode, initialized];
+  List<Object?> get props => [themeMode, initialized, seedColor];
 }
 
 /// Coordinates high-level application behaviours such as bootstrapping.
@@ -67,6 +83,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       super(AppState.initial()) {
     on<AppStarted>(_onAppStarted);
     on<AppThemeChanged>(_onThemeChanged);
+    on<AppColorSeedChanged>(_onSeedChanged);
   }
 
   final LocalStorage _localStorage;
@@ -76,8 +93,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     final storedTheme = await _localStorage.readString(
       AppConstants.themePreferenceKey,
     );
+    final storedSeed = await _localStorage.readString(
+      AppConstants.colorSeedPreferenceKey,
+    );
     final themeMode = _mapTheme(storedTheme);
-    emit(state.copyWith(initialized: true, themeMode: themeMode));
+    final seedColor = _mapSeed(storedSeed);
+    emit(
+      state.copyWith(
+        initialized: true,
+        themeMode: themeMode,
+        seedColor: seedColor,
+      ),
+    );
   }
 
   /// Updates the theme mode for the entire application.
@@ -92,6 +119,20 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(themeMode: event.themeMode));
   }
 
+  /// Updates the color seed for the theme.
+  Future<void> _onSeedChanged(
+    AppColorSeedChanged event,
+    Emitter<AppState> emit,
+  ) async {
+    // ignore: deprecated_member_use
+    final argb = event.seedColor.value;
+    await _localStorage.writeString(
+      AppConstants.colorSeedPreferenceKey,
+      argb.toRadixString(16),
+    );
+    emit(state.copyWith(seedColor: event.seedColor));
+  }
+
   ThemeMode _mapTheme(String? value) {
     switch (value) {
       case 'light':
@@ -102,4 +143,27 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         return ThemeMode.system;
     }
   }
+
+  Color _mapSeed(String? value) {
+    if (value == null) {
+      return ColorPalette.primary;
+    }
+    final intValue = int.tryParse(value, radix: 16);
+    if (intValue == null) {
+      return ColorPalette.primary;
+    }
+    return Color(intValue);
+  }
+}
+
+/// Updates the global theme color seed.
+class AppColorSeedChanged extends AppEvent {
+  /// Creates a new [AppColorSeedChanged] event.
+  const AppColorSeedChanged(this.seedColor);
+
+  /// The selected color seed.
+  final Color seedColor;
+
+  @override
+  List<Object?> get props => [seedColor];
 }

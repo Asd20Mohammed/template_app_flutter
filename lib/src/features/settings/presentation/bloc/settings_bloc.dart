@@ -37,6 +37,30 @@ class SettingsLocaleChanged extends SettingsEvent {
   List<Object?> get props => [localeCode];
 }
 
+/// Updates the text scale factor used across the app.
+class SettingsTextScaleChanged extends SettingsEvent {
+  /// Creates a text scale change event.
+  const SettingsTextScaleChanged(this.textScale);
+
+  /// Desired text scale factor.
+  final double textScale;
+
+  @override
+  List<Object?> get props => [textScale];
+}
+
+/// Updates the responsive/layout scale factor used across the app.
+class SettingsLayoutScaleChanged extends SettingsEvent {
+  /// Creates a layout scale change event.
+  const SettingsLayoutScaleChanged(this.layoutScale);
+
+  /// Desired layout scale factor.
+  final double layoutScale;
+
+  @override
+  List<Object?> get props => [layoutScale];
+}
+
 /// Loads persisted settings from storage.
 class SettingsInitialized extends SettingsEvent {
   /// Creates an initialization event.
@@ -49,6 +73,8 @@ class SettingsState extends Equatable {
   const SettingsState({
     required this.notificationsEnabled,
     required this.localeCode,
+    required this.textScale,
+    required this.layoutScale,
   });
 
   /// Whether push notifications are enabled.
@@ -57,20 +83,42 @@ class SettingsState extends Equatable {
   /// The active locale code.
   final String localeCode;
 
+  /// Global text scale factor applied via [MediaQuery].
+  final double textScale;
+
+  /// Layout scale multiplier used by responsive utilities.
+  final double layoutScale;
+
   /// The initial settings state.
-  factory SettingsState.initial() =>
-      const SettingsState(notificationsEnabled: true, localeCode: 'en');
+  factory SettingsState.initial() => const SettingsState(
+    notificationsEnabled: true,
+    localeCode: 'en',
+    textScale: 1.0,
+    layoutScale: 1.0,
+  );
 
   /// Creates a copy with optional overrides.
-  SettingsState copyWith({bool? notificationsEnabled, String? localeCode}) {
+  SettingsState copyWith({
+    bool? notificationsEnabled,
+    String? localeCode,
+    double? textScale,
+    double? layoutScale,
+  }) {
     return SettingsState(
       notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
       localeCode: localeCode ?? this.localeCode,
+      textScale: textScale ?? this.textScale,
+      layoutScale: layoutScale ?? this.layoutScale,
     );
   }
 
   @override
-  List<Object?> get props => [notificationsEnabled, localeCode];
+  List<Object?> get props => [
+    notificationsEnabled,
+    localeCode,
+    textScale,
+    layoutScale,
+  ];
 }
 
 /// Coordinates user preferences across the application.
@@ -89,6 +137,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsInitialized>(_onInitialized);
     on<SettingsNotificationToggled>(_onNotificationToggled);
     on<SettingsLocaleChanged>(_onLocaleChanged);
+    on<SettingsTextScaleChanged>(_onTextScaleChanged);
+    on<SettingsLayoutScaleChanged>(_onLayoutScaleChanged);
   }
 
   final ReadBoolSettingUseCase _readBoolSettingUseCase;
@@ -110,10 +160,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           AppConstants.localePreferenceKey,
         ) ??
         'en';
+    final textScaleString = await _readStringSettingUseCase.execute(
+      AppConstants.textScalePreferenceKey,
+    );
+    final layoutScaleString = await _readStringSettingUseCase.execute(
+      AppConstants.layoutScalePreferenceKey,
+    );
+    final textScale = double.tryParse(textScaleString ?? '') ?? 1.0;
+    final layoutScale = double.tryParse(layoutScaleString ?? '') ?? 1.0;
     emit(
       state.copyWith(
         notificationsEnabled: notificationsEnabled,
         localeCode: localeCode,
+        textScale: textScale,
+        layoutScale: layoutScale,
       ),
     );
   }
@@ -140,5 +200,29 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       event.localeCode,
     );
     emit(state.copyWith(localeCode: event.localeCode));
+  }
+
+  Future<void> _onTextScaleChanged(
+    SettingsTextScaleChanged event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final scale = event.textScale.clamp(0.8, 1.4);
+    await _writeStringSettingUseCase.execute(
+      AppConstants.textScalePreferenceKey,
+      scale.toStringAsFixed(2),
+    );
+    emit(state.copyWith(textScale: scale));
+  }
+
+  Future<void> _onLayoutScaleChanged(
+    SettingsLayoutScaleChanged event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final scale = event.layoutScale.clamp(0.8, 1.4);
+    await _writeStringSettingUseCase.execute(
+      AppConstants.layoutScalePreferenceKey,
+      scale.toStringAsFixed(2),
+    );
+    emit(state.copyWith(layoutScale: scale));
   }
 }

@@ -22,7 +22,7 @@ import 'package:template_app/src/core/services/security/data_encryption.dart';
 import 'package:template_app/src/core/services/security/network_security.dart';
 import 'package:template_app/src/core/services/session/session_manager.dart';
 import 'package:template_app/src/core/utils/connectivity_checker.dart';
-import 'package:template_app/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:template_app/src/features/auth/data/repositories/offline_auth_repository.dart';
 import 'package:template_app/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:template_app/src/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:template_app/src/features/feature_flags/data/repositories/feature_repository_impl.dart';
@@ -30,6 +30,9 @@ import 'package:template_app/src/features/feature_flags/domain/repositories/feat
 import 'package:template_app/src/features/profile/data/repositories/user_repository_impl.dart';
 import 'package:template_app/src/features/profile/domain/repositories/user_repository.dart';
 import 'package:template_app/src/features/profile/domain/usecases/user_usecases.dart';
+import 'package:template_app/src/features/drafts/data/data_sources/draft_local_data_source.dart';
+import 'package:template_app/src/features/drafts/data/repositories/draft_repository_impl.dart';
+import 'package:template_app/src/features/drafts/domain/repositories/draft_repository.dart';
 import 'package:template_app/src/features/settings/data/repositories/settings_repository_impl.dart';
 import 'package:template_app/src/features/settings/domain/repositories/settings_repository.dart';
 import 'package:template_app/src/features/settings/domain/usecases/settings_usecases.dart';
@@ -64,9 +67,8 @@ Future<void> configureDependencies() async {
   );
   serviceLocator.registerLazySingleton(LocalizationManager.new);
   serviceLocator.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(
-      apiClient: serviceLocator(),
-      secureStorage: serviceLocator(),
+    () => OfflineAuthRepository(
+      localStorage: serviceLocator(),
       sessionManager: serviceLocator(),
     ),
   );
@@ -87,6 +89,12 @@ Future<void> configureDependencies() async {
   );
   serviceLocator.registerLazySingleton<UserRepository>(
     () => serviceLocator<UserRepositoryImpl>(),
+  );
+  serviceLocator.registerLazySingleton(
+    () => DraftLocalDataSource(localStorage: serviceLocator()),
+  );
+  serviceLocator.registerLazySingleton<DraftRepository>(
+    () => DraftRepositoryImpl(serviceLocator()),
   );
   serviceLocator.registerLazySingleton(() => LoginUseCase(serviceLocator()));
   serviceLocator.registerLazySingleton(() => RegisterUseCase(serviceLocator()));

@@ -1,17 +1,16 @@
 // Builds the light and dark theme configurations.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/color_palette.dart';
 import 'package:template_app/src/core/theme/typography.dart';
 
 /// Provides theme data for MaterialApp.
 class AppTheme {
   /// Returns the configured light theme.
-  static ThemeData light() {
+  static ThemeData light(Color seedColor) {
     return ThemeData(
       brightness: Brightness.light,
-      primaryColor: ColorPalette.primary,
+      primaryColor: seedColor,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorPalette.primary,
+        seedColor: seedColor,
         brightness: Brightness.light,
       ),
       textTheme: const TextTheme(
@@ -24,12 +23,12 @@ class AppTheme {
   }
 
   /// Returns the configured dark theme.
-  static ThemeData dark() {
+  static ThemeData dark(Color seedColor) {
     return ThemeData(
       brightness: Brightness.dark,
-      primaryColor: ColorPalette.accent,
+      primaryColor: seedColor,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorPalette.accent,
+        seedColor: seedColor,
         brightness: Brightness.dark,
       ),
       textTheme: const TextTheme(

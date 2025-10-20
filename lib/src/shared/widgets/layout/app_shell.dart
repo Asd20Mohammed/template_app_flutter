@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_app/src/app/bloc/blocs.dart';
+import 'package:template_app/src/app/router/app_router.dart';
 import 'package:template_app/src/shared/widgets/feedback/app_snackbar.dart';
 
 /// Base layout used across authenticated screens.
@@ -34,7 +35,60 @@ class AppShell extends StatelessWidget {
             ),
           ],
         ),
+        drawer: const _AppDrawer(),
         body: child,
+      ),
+    );
+  }
+}
+
+class _AppDrawer extends StatelessWidget {
+  const _AppDrawer();
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = context.watch<AuthBloc>().state;
+    final user = authState.user;
+    final displayName = user?.displayName ?? 'Guest User';
+    final trimmed = displayName.trim();
+    final initial = trimmed.isNotEmpty ? trimmed[0].toUpperCase() : 'G';
+    return Drawer(
+      child: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            ListTile(
+              leading: CircleAvatar(child: Text(initial)),
+              title: Text(displayName),
+              subtitle: Text(user?.email ?? 'anonymous@example.com'),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.of(context).pop();
+                const HomeRoute().go(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
+              onTap: () {
+                Navigator.of(context).pop();
+                const ProfileRoute().go(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.of(context).pop();
+                const SettingsRoute().go(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

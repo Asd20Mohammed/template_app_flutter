@@ -11,6 +11,7 @@ class UserModel extends User {
     required super.displayName,
     required List<RoleModel> super.roles,
     super.avatarUrl,
+    super.isGuest = false,
   }) : _roles = roles;
 
   final List<RoleModel> _roles;
@@ -27,6 +28,7 @@ class UserModel extends User {
       displayName: json['displayName'] as String? ?? '',
       avatarUrl: json['avatarUrl'] as String?,
       roles: roles,
+      isGuest: json['isGuest'] as bool? ?? false,
     );
   }
 
@@ -38,6 +40,16 @@ class UserModel extends User {
       'displayName': displayName,
       'avatarUrl': avatarUrl,
       'roles': _roles.map((e) => e.toJson()).toList(),
+      'isGuest': isGuest,
     };
   }
+
+  /// Creates a guest user template.
+  factory UserModel.guest() => const UserModel(
+    id: 'guest-0',
+    email: 'guest@local.app',
+    displayName: 'Guest User',
+    roles: [],
+    isGuest: true,
+  );
 }
