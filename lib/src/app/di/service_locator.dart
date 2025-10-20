@@ -1,7 +1,6 @@
 // Configures dependency injection using get_it.
 import 'package:get_it/get_it.dart';
 import 'package:template_app/src/app/router/deep_link_handler.dart';
-import 'package:template_app/src/app/router/route_guard.dart';
 import 'package:template_app/src/core/config/app_config.dart';
 import 'package:template_app/src/core/data/data_sources/local/cache_storage.dart';
 import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
@@ -114,9 +113,6 @@ Future<void> configureDependencies() async {
     () => WriteStringSettingUseCase(serviceLocator()),
   );
   serviceLocator.registerLazySingleton(DeepLinkHandler.new);
-  serviceLocator.registerLazySingleton(
-    () => RouteGuard(sessionManager: serviceLocator()),
-  );
   AppLogger.configure(enableDebugLogging: true);
 
   final storage = serviceLocator<LocalStorage>();

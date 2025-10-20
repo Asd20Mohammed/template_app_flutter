@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_app/src/app/bloc/blocs.dart';
+import 'package:template_app/src/app/router/app_router.dart';
 import 'package:template_app/src/shared/widgets/buttons/primary_button.dart';
 
 /// Settings screen containing preferences and account actions.
@@ -54,8 +55,8 @@ class SettingsPage extends StatelessWidget {
               label: 'Logout',
               onPressed: () {
                 context.read<AuthBloc>().add(const AuthLogoutRequested());
-                Navigator.of(context).popUntil((route) => route.isFirst);
-                Navigator.of(context).pushReplacementNamed('/login');
+                final locale = context.read<SettingsBloc>().state.localeCode;
+                LoginRoute(locale: locale).go(context);
               },
             ),
           ],

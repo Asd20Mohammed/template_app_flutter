@@ -5,6 +5,7 @@ import 'package:template_app/src/app/router/app_router.dart';
 import 'package:template_app/src/core/utils/validators.dart';
 import 'package:template_app/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:template_app/src/features/profile/presentation/bloc/user_bloc.dart';
+import 'package:template_app/src/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:template_app/src/shared/forms/bloc/template_form_bloc.dart';
 import 'package:template_app/src/shared/widgets/buttons/primary_button.dart';
 import 'package:template_app/src/shared/widgets/forms/app_text_field.dart';
@@ -37,7 +38,8 @@ class _LoginPageState extends State<LoginPage> {
         listener: (context, state) {
           if (state.status == AuthStatus.authenticated) {
             context.read<UserBloc>().add(const UserProfileRequested());
-            Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+            final locale = context.read<SettingsBloc>().state.localeCode;
+            HomeRoute(locale: locale).go(context);
           } else if (state.status == AuthStatus.failure &&
               state.errorMessage != null) {
             ScaffoldMessenger.of(

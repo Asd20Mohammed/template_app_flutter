@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:template_app/src/app/bloc/blocs.dart';
 import 'package:template_app/src/app/di/service_locator.dart';
 import 'package:template_app/src/app/router/app_router.dart';
+import 'package:template_app/src/app/router/deep_link_handler.dart';
 import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
 import 'package:template_app/src/core/localization/localization_manager.dart';
 import 'package:template_app/src/core/services/network/connectivity_service.dart';
@@ -19,16 +21,9 @@ import 'package:template_app/src/features/settings/domain/usecases/settings_usec
 class App extends StatelessWidget {
   /// Creates a new [App].
   App({super.key})
-    : _router = AppRouter(
-        routeGuard: serviceLocator(),
-        deepLinkHandler: serviceLocator(),
-      ),
-      _localizationManager = serviceLocator(),
-      _routeObserver = RouteObserver<ModalRoute<void>>();
+    : _localizationManager = serviceLocator<LocalizationManager>();
 
-  final AppRouter _router;
   final LocalizationManager _localizationManager;
-  final RouteObserver<ModalRoute<void>> _routeObserver;
 
   @override
   Widget build(BuildContext context) {
@@ -82,32 +77,100 @@ class App extends StatelessWidget {
         BlocProvider<ErrorBloc>(create: (_) => ErrorBloc()),
         BlocProvider<TemplateFormBloc>(create: (_) => TemplateFormBloc()),
       ],
-      child: BlocListener<SettingsBloc, SettingsState>(
-        listenWhen: (previous, current) =>
-            previous.localeCode != current.localeCode,
-        listener: (context, state) {
-          _localizationManager.updateLocale(Locale(state.localeCode));
-        },
+      child: AppRouterHost(localizationManager: _localizationManager),
+    );
+  }
+}
+
+/// Hosts the [GoRouter] configuration and binds localization updates.
+class AppRouterHost extends StatefulWidget {
+  /// Creates a new router host.
+  const AppRouterHost({required this.localizationManager, super.key});
+
+  /// Localization manager shared across the app.
+  final LocalizationManager localizationManager;
+
+  @override
+  State<AppRouterHost> createState() => _AppRouterHostState();
+}
+
+class _AppRouterHostState extends State<AppRouterHost> {
+  GoRouter? _router;
+  final RouteObserver<ModalRoute<void>> _routeObserver =
+      RouteObserver<ModalRoute<void>>();
+  late final DeepLinkHandler _deepLinkHandler = serviceLocator();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _router ??= _createRouter(context);
+  }
+
+  GoRouter _createRouter(BuildContext context) {
+    return GoRouter(
+      routes: $appRoutes,
+      initialLocation: const SplashRoute().location,
+      redirect: (context, state) {
+        final location = state.uri.toString();
+        if (_deepLinkHandler.canHandle(location)) {
+          return _deepLinkHandler.resolve(location);
+        }
+        return null;
+      },
+      observers: [_routeObserver],
+      errorBuilder: (context, state) {
+        return const NotFoundRoute().build(context, state);
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final localizationManager = widget.localizationManager;
+    return BlocListener<SettingsBloc, SettingsState>(
+      listenWhen: (previous, current) =>
+          previous.localeCode != current.localeCode,
+      listener: (context, state) {
+        localizationManager.updateLocale(Locale(state.localeCode));
+      },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AuthBloc, AuthState>(
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
+            listener: (context, state) {
+              final locale = context.read<SettingsBloc>().state.localeCode;
+              final router = _router;
+              if (router == null) {
+                return;
+              }
+              if (state.status == AuthStatus.authenticated) {
+                router.go(HomeRoute(locale: locale).location);
+              } else if (state.status == AuthStatus.unauthenticated) {
+                router.go(LoginRoute(locale: locale).location);
+              }
+            },
+          ),
+        ],
         child: AnimatedBuilder(
-          animation: _localizationManager,
+          animation: localizationManager,
           builder: (context, _) {
             return BlocBuilder<AppBloc, AppState>(
               builder: (context, appState) {
-                return MaterialApp(
+                return MaterialApp.router(
                   debugShowCheckedModeBanner: false,
-                  title: _localizationManager.translate('app_title'),
+                  title: localizationManager.translate('app_title'),
                   theme: AppTheme.light(),
                   darkTheme: AppTheme.dark(),
                   themeMode: appState.themeMode,
-                  locale: _localizationManager.locale,
+                  locale: localizationManager.locale,
                   supportedLocales: const [Locale('en'), Locale('ar')],
                   localizationsDelegates: const [
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  onGenerateRoute: _router.onGenerateRoute,
-                  navigatorObservers: [_routeObserver],
+                  routerConfig: _router!,
                 );
               },
             );
