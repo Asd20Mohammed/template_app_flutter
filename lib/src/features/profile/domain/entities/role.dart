@@ -1,6 +1,6 @@
 // Describes a role that aggregates multiple permissions.
 import 'package:equatable/equatable.dart';
-import 'package:template_app/src/features/profile/domain/entities/permission.dart';
+import '/src/features/profile/domain/entities/permission.dart';
 
 /// Immutable role entity that groups permissions.
 class Role extends Equatable {

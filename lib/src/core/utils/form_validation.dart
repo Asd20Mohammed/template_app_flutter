@@ -1,5 +1,5 @@
 // Provides helper methods for validating complex forms.
-import 'package:template_app/src/core/errors/models/form_error.dart';
+import '/src/core/errors/models/form_error.dart';
 
 /// Performs batch validation and throws when invalid.
 class FormValidation {

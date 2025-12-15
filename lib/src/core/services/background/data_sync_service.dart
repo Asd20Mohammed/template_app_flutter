@@ -1,6 +1,6 @@
 // Handles syncing data with remote sources in the background.
 import 'package:logging/logging.dart';
-import 'package:template_app/src/core/data/data_sources/remote/api_client.dart';
+import '/src/core/data/data_sources/remote/api_client.dart';
 
 /// Coordinates background data synchronization tasks.
 class DataSyncService {

@@ -1,6 +1,6 @@
 // Provides user domain operations as injectable use cases.
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
-import 'package:template_app/src/features/profile/domain/repositories/user_repository.dart';
+import '/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/repositories/user_repository.dart';
 
 /// Returns the active user profile.
 class FetchUserProfileUseCase {

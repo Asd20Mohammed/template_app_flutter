@@ -1,6 +1,6 @@
 // Data transfer object for [User] including serialization helpers.
-import 'package:template_app/src/features/profile/data/models/role_model.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/data/models/role_model.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Represents a persisted user profile record.
 class UserModel extends User {

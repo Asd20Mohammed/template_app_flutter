@@ -1,9 +1,9 @@
 // Shows user configurable application settings.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/app/router/app_router.dart';
-import 'package:template_app/src/shared/widgets/buttons/primary_button.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/app/router/app_router.dart';
+import '/src/shared/widgets/buttons/primary_button.dart';
 
 /// Settings screen containing preferences and account actions.
 class SettingsPage extends StatelessWidget {

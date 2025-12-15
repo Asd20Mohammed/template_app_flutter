@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/app/presentation/pages/splash_page.dart';
-import 'package:template_app/src/features/auth/presentation/pages/login_page.dart';
-import 'package:template_app/src/features/dashboard/presentation/pages/home_page.dart';
-import 'package:template_app/src/features/profile/presentation/pages/profile_page.dart';
-import 'package:template_app/src/features/settings/presentation/pages/settings_page.dart';
-import 'package:template_app/src/shared/widgets/layout/app_shell.dart';
-import 'package:template_app/src/shared/widgets/state/loading_view.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/app/presentation/pages/splash_page.dart';
+import '/src/features/auth/presentation/pages/login_page.dart';
+import '/src/features/dashboard/presentation/pages/home_page.dart';
+import '/src/features/profile/presentation/pages/profile_page.dart';
+import '/src/features/settings/presentation/pages/settings_page.dart';
+import '/src/shared/widgets/layout/app_shell.dart';
+import '/src/shared/widgets/state/loading_view.dart';
 
 part 'app_router.g.dart';
 

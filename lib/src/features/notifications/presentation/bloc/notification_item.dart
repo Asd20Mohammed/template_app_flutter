@@ -1,7 +1,7 @@
 // Manages notification routing for push, local, and in-app messages.
 
 import 'package:equatable/equatable.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_type.dart';
+import '/src/features/notifications/presentation/bloc/notification_type.dart';
 
 /// Represents a single notification item in memory.
 class NotificationItem extends Equatable {

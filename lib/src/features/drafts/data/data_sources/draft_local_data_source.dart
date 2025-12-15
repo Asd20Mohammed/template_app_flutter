@@ -1,7 +1,7 @@
 // Low-level data source persisting drafts using [LocalStorage].
 import 'dart:convert';
 
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
 
 /// Handles raw persistence for draft entries.
 class DraftLocalDataSource {

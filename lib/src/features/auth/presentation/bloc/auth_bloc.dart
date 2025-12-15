@@ -1,8 +1,8 @@
 // Manages authentication flows such as login and registration.
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/features/auth/domain/usecases/auth_usecases.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/auth/domain/usecases/auth_usecases.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Represents the authentication status transitions.
 enum AuthStatus { unknown, authenticated, unauthenticated, loading, failure }

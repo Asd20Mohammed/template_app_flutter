@@ -1,6 +1,6 @@
 // Data transfer object for [Role].
-import 'package:template_app/src/features/profile/data/models/permission_model.dart';
-import 'package:template_app/src/features/profile/domain/entities/role.dart';
+import '/src/features/profile/data/models/permission_model.dart';
+import '/src/features/profile/domain/entities/role.dart';
 
 /// Converts [Role] domain objects to and from json.
 class RoleModel extends Role {

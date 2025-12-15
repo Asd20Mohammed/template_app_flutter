@@ -1,8 +1,8 @@
 // Manages user profile data across the application.
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
-import 'package:template_app/src/features/profile/domain/usecases/user_usecases.dart';
+import '/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/usecases/user_usecases.dart';
 
 /// Defines the events supported by [UserBloc].
 abstract class UserEvent extends Equatable {

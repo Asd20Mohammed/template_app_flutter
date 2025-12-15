@@ -1,6 +1,6 @@
 // Coordinates authentication session lifecycle and caching.
 import 'package:logging/logging.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Stores the active user session in memory.
 class SessionManager {

@@ -1,16 +1,16 @@
 // Home dashboard showcasing the available template components.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
-import 'package:template_app/src/core/utils/responsive_utils.dart';
-import 'package:template_app/src/features/drafts/presentation/bloc/draft_bloc.dart';
-import 'package:template_app/src/shared/widgets/cards/app_card.dart';
-import 'package:template_app/src/shared/widgets/cards/list_item.dart';
-import 'package:template_app/src/shared/widgets/layout/section_header.dart';
-import 'package:template_app/src/shared/widgets/state/empty_view.dart';
-import 'package:template_app/src/shared/widgets/state/error_view.dart';
-import 'package:template_app/src/shared/widgets/state/loading_view.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/core/theme/spacing.dart';
+import '/src/core/utils/responsive_utils.dart';
+import '/src/features/drafts/presentation/bloc/draft_bloc.dart';
+import '/src/shared/widgets/cards/app_card.dart';
+import '/src/shared/widgets/cards/list_item.dart';
+import '/src/shared/widgets/layout/section_header.dart';
+import '/src/shared/widgets/state/empty_view.dart';
+import '/src/shared/widgets/state/error_view.dart';
+import '/src/shared/widgets/state/loading_view.dart';
 
 /// Landing page for authenticated users.
 class HomePage extends StatelessWidget {

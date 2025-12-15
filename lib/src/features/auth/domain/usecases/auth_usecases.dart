@@ -1,6 +1,6 @@
 // Encapsulates authentication business logic.
-import 'package:template_app/src/features/auth/domain/repositories/auth_repository.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/auth/domain/repositories/auth_repository.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Use case responsible for logging in a user.
 class LoginUseCase {

@@ -1,10 +1,10 @@
 // Concrete authentication repository wiring together data sources.
-import 'package:template_app/src/core/data/data_sources/local/secure_storage.dart';
-import 'package:template_app/src/core/data/data_sources/remote/api_client.dart';
-import 'package:template_app/src/core/services/session/session_manager.dart';
-import 'package:template_app/src/features/auth/domain/repositories/auth_repository.dart';
-import 'package:template_app/src/features/profile/data/models/user_model.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/core/data/data_sources/local/secure_storage.dart';
+import '/src/core/data/data_sources/remote/api_client.dart';
+import '/src/core/services/session/session_manager.dart';
+import '/src/features/auth/domain/repositories/auth_repository.dart';
+import '/src/features/profile/data/models/user_model.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Implements authentication use cases backed by HTTP APIs.
 class AuthRepositoryImpl implements AuthRepository {

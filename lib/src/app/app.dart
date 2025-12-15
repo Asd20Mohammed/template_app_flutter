@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/app/di/service_locator.dart';
-import 'package:template_app/src/app/router/app_router.dart';
-import 'package:template_app/src/app/router/deep_link_handler.dart';
-import 'package:template_app/src/app/state_management.dart';
-import 'package:template_app/src/core/localization/localization_manager.dart';
-import 'package:template_app/src/core/theme/app_theme.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/app/di/service_locator.dart';
+import '/src/app/router/app_router.dart';
+import '/src/app/router/deep_link_handler.dart';
+import '/src/app/state_management.dart';
+import '/src/core/localization/localization_manager.dart';
+import '/src/core/theme/app_theme.dart';
 
 /// MaterialApp wrapper configuring routing, themes, and localization.
 class App extends StatelessWidget {

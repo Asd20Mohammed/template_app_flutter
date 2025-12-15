@@ -1,5 +1,5 @@
 // Wraps settings mutations into declarative use cases.
-import 'package:template_app/src/features/settings/domain/repositories/settings_repository.dart';
+import '/src/features/settings/domain/repositories/settings_repository.dart';
 
 /// Reads a boolean flag from settings.
 class ReadBoolSettingUseCase {

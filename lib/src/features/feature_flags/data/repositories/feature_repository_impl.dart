@@ -1,8 +1,8 @@
 // Concrete implementation managing feature flags.
 import 'dart:convert';
 
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/features/feature_flags/domain/repositories/feature_repository.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/features/feature_flags/domain/repositories/feature_repository.dart';
 
 /// Persists feature flags as a single json blob.
 class FeatureRepositoryImpl implements FeatureRepository {

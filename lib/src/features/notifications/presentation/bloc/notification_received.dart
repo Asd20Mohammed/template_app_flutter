@@ -1,7 +1,7 @@
 // Manages notification routing for push, local, and in-app messages.
 
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_event.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_type.dart';
+import '/src/features/notifications/presentation/bloc/notification_event.dart';
+import '/src/features/notifications/presentation/bloc/notification_type.dart';
 
 /// Emits a notification payload to subscribers.
 class NotificationReceived extends NotificationEvent {

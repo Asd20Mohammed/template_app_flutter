@@ -1,5 +1,5 @@
 // Declares the contract required for authentication workflows.
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Authentication repository abstraction for DI.
 abstract class AuthRepository {

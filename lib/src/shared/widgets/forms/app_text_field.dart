@@ -1,6 +1,6 @@
 // Wraps [TextFormField] with template styling and validation.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Primary text field widget for forms.
 class AppTextField extends StatelessWidget {

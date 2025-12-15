@@ -2,9 +2,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/core/constants/app_constants.dart';
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/core/theme/color_palette.dart';
+import '/src/core/constants/app_constants.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/core/theme/color_palette.dart';
 
 /// Describes the possible events that can update [AppBloc].
 abstract class AppEvent extends Equatable {

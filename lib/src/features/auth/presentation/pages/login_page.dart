@@ -1,14 +1,14 @@
 // Provides authentication forms for signing in and registering.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/router/app_router.dart';
-import 'package:template_app/src/core/utils/validators.dart';
-import 'package:template_app/src/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_app/src/features/profile/presentation/bloc/user_bloc.dart';
-import 'package:template_app/src/features/settings/presentation/bloc/settings_bloc.dart';
-import 'package:template_app/src/shared/forms/bloc/template_form_bloc.dart';
-import 'package:template_app/src/shared/widgets/buttons/primary_button.dart';
-import 'package:template_app/src/shared/widgets/forms/app_text_field.dart';
+import '/src/app/router/app_router.dart';
+import '/src/core/utils/validators.dart';
+import '/src/features/auth/presentation/bloc/auth_bloc.dart';
+import '/src/features/profile/presentation/bloc/user_bloc.dart';
+import '/src/features/settings/presentation/bloc/settings_bloc.dart';
+import '/src/shared/forms/bloc/template_form_bloc.dart';
+import '/src/shared/widgets/buttons/primary_button.dart';
+import '/src/shared/widgets/forms/app_text_field.dart';
 
 /// Authentication screen with login and registration forms.
 class LoginPage extends StatefulWidget {

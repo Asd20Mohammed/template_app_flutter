@@ -1,6 +1,6 @@
 // Manages notification routing for push, local, and in-app messages.
 
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_event.dart';
+import '/src/features/notifications/presentation/bloc/notification_event.dart';
 
 /// Clears all notifications from the state.
 class NotificationCleared extends NotificationEvent {

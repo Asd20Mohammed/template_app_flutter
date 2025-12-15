@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/app/di/service_locator.dart';
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/core/services/network/connectivity_service.dart';
-import 'package:template_app/src/core/services/notifications/push_notification_service.dart';
-import 'package:template_app/src/features/auth/domain/usecases/auth_usecases.dart';
-import 'package:template_app/src/features/feature_flags/domain/repositories/feature_repository.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_registration_requested.dart';
-import 'package:template_app/src/features/profile/domain/usecases/user_usecases.dart';
-import 'package:template_app/src/features/settings/domain/usecases/settings_usecases.dart';
-import 'package:template_app/src/features/drafts/presentation/bloc/draft_bloc.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/app/di/service_locator.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/core/services/network/connectivity_service.dart';
+import '/src/core/services/notifications/push_notification_service.dart';
+import '/src/features/auth/domain/usecases/auth_usecases.dart';
+import '/src/features/feature_flags/domain/repositories/feature_repository.dart';
+import '/src/features/notifications/presentation/bloc/notification_registration_requested.dart';
+import '/src/features/profile/domain/usecases/user_usecases.dart';
+import '/src/features/settings/domain/usecases/settings_usecases.dart';
+import '/src/features/drafts/presentation/bloc/draft_bloc.dart';
 
 /// State management setup for the application.
 /// This class provides all the BlocProviders needed for the app.

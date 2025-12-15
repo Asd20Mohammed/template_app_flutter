@@ -1,5 +1,5 @@
 // Provides read/write access to user profile data.
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Repository interface for user data management.
 abstract class UserRepository {

@@ -1,10 +1,10 @@
 // Displays a splash screen while the app initializes.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/router/app_router.dart';
-import 'package:template_app/src/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_app/src/features/settings/presentation/bloc/settings_bloc.dart';
-import 'package:template_app/src/shared/widgets/state/loading_view.dart';
+import '/src/app/router/app_router.dart';
+import '/src/features/auth/presentation/bloc/auth_bloc.dart';
+import '/src/features/settings/presentation/bloc/settings_bloc.dart';
+import '/src/shared/widgets/state/loading_view.dart';
 
 /// Splash screen that decides the initial navigation pathway.
 class SplashPage extends StatefulWidget {

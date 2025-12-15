@@ -1,6 +1,6 @@
 // Provides a reusable card container for content sections.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Styled card widget with consistent padding.
 class AppCard extends StatelessWidget {

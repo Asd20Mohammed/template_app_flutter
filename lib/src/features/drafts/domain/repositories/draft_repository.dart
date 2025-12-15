@@ -1,5 +1,5 @@
 // Contract describing draft storage operations.
-import 'package:template_app/src/features/drafts/domain/entities/draft_entry.dart';
+import '/src/features/drafts/domain/entities/draft_entry.dart';
 
 /// Repository responsible for managing offline draft entries.
 abstract class DraftRepository {

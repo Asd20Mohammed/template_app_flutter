@@ -1,7 +1,7 @@
 // Draft repository backed by [DraftLocalDataSource].
-import 'package:template_app/src/features/drafts/data/data_sources/draft_local_data_source.dart';
-import 'package:template_app/src/features/drafts/domain/entities/draft_entry.dart';
-import 'package:template_app/src/features/drafts/domain/repositories/draft_repository.dart';
+import '/src/features/drafts/data/data_sources/draft_local_data_source.dart';
+import '/src/features/drafts/domain/entities/draft_entry.dart';
+import '/src/features/drafts/domain/repositories/draft_repository.dart';
 
 /// Stores draft entries locally for offline usage.
 class DraftRepositoryImpl implements DraftRepository {

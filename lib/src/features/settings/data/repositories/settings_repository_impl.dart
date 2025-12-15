@@ -1,6 +1,6 @@
 // Concrete implementation of [SettingsRepository].
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/features/settings/domain/repositories/settings_repository.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/features/settings/domain/repositories/settings_repository.dart';
 
 /// Stores settings using shared preferences.
 class SettingsRepositoryImpl implements SettingsRepository {

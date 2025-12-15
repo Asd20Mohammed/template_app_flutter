@@ -1,6 +1,6 @@
 // Displays a friendly message when there is no content to show.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Simple reusable empty state.
 class EmptyView extends StatelessWidget {

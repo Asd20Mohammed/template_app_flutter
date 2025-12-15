@@ -1,7 +1,7 @@
 // Coordinates feature flags and domain specific toggles.
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/features/feature_flags/domain/repositories/feature_repository.dart';
+import '/src/features/feature_flags/domain/repositories/feature_repository.dart';
 
 /// Base definition for feature events.
 abstract class FeatureEvent extends Equatable {

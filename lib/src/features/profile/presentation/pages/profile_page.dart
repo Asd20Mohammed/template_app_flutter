@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Displays the user profile information.
 class ProfilePage extends StatelessWidget {

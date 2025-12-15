@@ -1,6 +1,6 @@
 // Displays a section header with optional subtitle.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Reusable section header widget.
 class SectionHeader extends StatelessWidget {

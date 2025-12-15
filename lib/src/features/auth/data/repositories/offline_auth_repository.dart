@@ -1,11 +1,11 @@
 // Provides an offline-first authentication implementation backed by local storage.
 import 'dart:convert';
 
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/core/services/session/session_manager.dart';
-import 'package:template_app/src/features/auth/domain/repositories/auth_repository.dart';
-import 'package:template_app/src/features/profile/data/models/user_model.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/core/services/session/session_manager.dart';
+import '/src/features/auth/domain/repositories/auth_repository.dart';
+import '/src/features/profile/data/models/user_model.dart';
+import '/src/features/profile/domain/entities/user.dart';
 
 /// Authentication repository that keeps credentials locally for offline usage.
 class OfflineAuthRepository implements AuthRepository {

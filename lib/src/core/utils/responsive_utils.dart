@@ -1,7 +1,7 @@
 // Offers helper methods for responsive layout calculations.
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/features/settings/presentation/bloc/settings_bloc.dart';
+import '/src/features/settings/presentation/bloc/settings_bloc.dart';
 
 /// Styling helpers for responsive sizing.
 class ResponsiveUtils {

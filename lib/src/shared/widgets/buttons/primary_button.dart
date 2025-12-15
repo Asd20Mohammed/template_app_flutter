@@ -1,6 +1,6 @@
 // Primary elevated button used across the app.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Styled elevated button with full-width support.
 class PrimaryButton extends StatelessWidget {

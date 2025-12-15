@@ -1,5 +1,5 @@
 // Data transfer object for [Permission].
-import 'package:template_app/src/features/profile/domain/entities/permission.dart';
+import '/src/features/profile/domain/entities/permission.dart';
 
 /// Implements serialization helpers for [Permission].
 class PermissionModel extends Permission {

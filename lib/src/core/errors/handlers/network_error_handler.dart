@@ -1,6 +1,6 @@
 // Specialized handler for network related errors.
 import 'package:dio/dio.dart';
-import 'package:template_app/src/core/errors/models/network_error.dart';
+import '/src/core/errors/models/network_error.dart';
 
 /// Maps Dio errors into strongly typed [NetworkError] instances.
 class NetworkErrorHandler {

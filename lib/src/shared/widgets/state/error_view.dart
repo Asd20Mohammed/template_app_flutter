@@ -1,6 +1,6 @@
 // Presents an error state with retry support.
 import 'package:flutter/material.dart';
-import 'package:template_app/src/core/theme/spacing.dart';
+import '/src/core/theme/spacing.dart';
 
 /// Reusable error widget for the UI layer.
 class ErrorView extends StatelessWidget {

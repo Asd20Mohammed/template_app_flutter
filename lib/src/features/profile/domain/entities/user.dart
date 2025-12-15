@@ -1,6 +1,6 @@
 // Represents the core user domain entity.
 import 'package:equatable/equatable.dart';
-import 'package:template_app/src/features/profile/domain/entities/role.dart';
+import '/src/features/profile/domain/entities/role.dart';
 
 /// Immutable user object utilised across the app.
 class User extends Equatable {

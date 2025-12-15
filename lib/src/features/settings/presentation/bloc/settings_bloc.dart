@@ -1,8 +1,8 @@
 // Handles application-level settings such as localization and preferences.
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/core/constants/app_constants.dart';
-import 'package:template_app/src/features/settings/domain/usecases/settings_usecases.dart';
+import '/src/core/constants/app_constants.dart';
+import '/src/features/settings/domain/usecases/settings_usecases.dart';
 
 /// Represents the supported events for [SettingsBloc].
 abstract class SettingsEvent extends Equatable {

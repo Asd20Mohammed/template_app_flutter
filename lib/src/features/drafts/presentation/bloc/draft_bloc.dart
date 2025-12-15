@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-import 'package:template_app/src/features/drafts/domain/entities/draft_entry.dart';
-import 'package:template_app/src/features/drafts/domain/repositories/draft_repository.dart';
+import '/src/features/drafts/domain/entities/draft_entry.dart';
+import '/src/features/drafts/domain/repositories/draft_repository.dart';
 
 part 'draft_event.dart';
 part 'draft_state.dart';

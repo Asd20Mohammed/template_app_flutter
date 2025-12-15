@@ -1,13 +1,13 @@
 // Concrete implementation for user profile persistence.
 import 'dart:convert';
 
-import 'package:template_app/src/core/data/data_sources/local/local_storage.dart';
-import 'package:template_app/src/features/profile/data/models/permission_model.dart';
-import 'package:template_app/src/features/profile/data/models/role_model.dart';
-import 'package:template_app/src/features/profile/data/models/user_model.dart';
-import 'package:template_app/src/features/profile/domain/entities/role.dart';
-import 'package:template_app/src/features/profile/domain/entities/user.dart';
-import 'package:template_app/src/features/profile/domain/repositories/user_repository.dart';
+import '/src/core/data/data_sources/local/local_storage.dart';
+import '/src/features/profile/data/models/permission_model.dart';
+import '/src/features/profile/data/models/role_model.dart';
+import '/src/features/profile/data/models/user_model.dart';
+import '/src/features/profile/domain/entities/role.dart';
+import '/src/features/profile/domain/entities/user.dart';
+import '/src/features/profile/domain/repositories/user_repository.dart';
 
 /// Persists user profiles using local storage for the template.
 class UserRepositoryImpl implements UserRepository {

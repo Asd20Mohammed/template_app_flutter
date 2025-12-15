@@ -1,12 +1,12 @@
 // Manages notification routing for push, local, and in-app messages.
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/core/services/notifications/push_notification_service.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_cleared.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_event.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_item.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_received.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_registration_requested.dart';
-import 'package:template_app/src/features/notifications/presentation/bloc/notification_state.dart';
+import '/src/core/services/notifications/push_notification_service.dart';
+import '/src/features/notifications/presentation/bloc/notification_cleared.dart';
+import '/src/features/notifications/presentation/bloc/notification_event.dart';
+import '/src/features/notifications/presentation/bloc/notification_item.dart';
+import '/src/features/notifications/presentation/bloc/notification_received.dart';
+import '/src/features/notifications/presentation/bloc/notification_registration_requested.dart';
+import '/src/features/notifications/presentation/bloc/notification_state.dart';
 
 /// Coordinates notification handling for multiple channels.
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {

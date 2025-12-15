@@ -1,9 +1,9 @@
 // Provides a shared scaffold wrapper for feature screens.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/src/app/bloc/blocs.dart';
-import 'package:template_app/src/app/router/app_router.dart';
-import 'package:template_app/src/shared/widgets/feedback/app_snackbar.dart';
+import '/src/app/bloc/blocs.dart';
+import '/src/app/router/app_router.dart';
+import '/src/shared/widgets/feedback/app_snackbar.dart';
 
 /// Base layout used across authenticated screens.
 class AppShell extends StatelessWidget {

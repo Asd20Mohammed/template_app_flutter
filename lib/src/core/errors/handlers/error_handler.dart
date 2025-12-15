@@ -1,6 +1,6 @@
 // Central error handling utility that dispatches issues to the [ErrorBloc].
-import 'package:template_app/src/core/errors/models/app_error.dart';
-import 'package:template_app/src/core/errors/presentation/error_bloc.dart';
+import '/src/core/errors/models/app_error.dart';
+import '/src/core/errors/presentation/error_bloc.dart';
 
 /// Converts exceptions into user friendly messages.
 class ErrorHandler {

@@ -1,5 +1,5 @@
 // Represents errors occurring during network calls.
-import 'package:template_app/src/core/errors/models/app_error.dart';
+import '/src/core/errors/models/app_error.dart';
 
 /// Specific exception for network failures.
 class NetworkError extends AppError {
