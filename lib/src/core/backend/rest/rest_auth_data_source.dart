@@ -82,6 +82,9 @@ class RestAuthDataSource implements AuthDataSource {
 
   @override
   Future<DataResult<Map<String, dynamic>?>> getCurrentUser() async {
+    if (_currentUser != null) {
+      return DataResult.success(_currentUser);
+    }
     try {
       final response = await _dio.get('$_authEndpoint/me');
       final userData = response.data as Map<String, dynamic>?;
